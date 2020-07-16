@@ -1,0 +1,47 @@
+﻿@model MVC.Models.ClientesTelefonosModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "ClientesTelefonos", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>ClientesTelefonosModel</h4>
+    <hr />
+
+    <div class="form-group">
+        <h5>Telefono</h5>
+        @Html.TextBoxFor(m => m.ClientesTels.Telefono , htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <h5>CLientes</h5>
+        @Html.DropDownListFor(m => m.ClientesTels.ClienteId, new SelectList(Model.clients, "Id", "Nombre"), new { htmlAttributes = new { @class = "form-control" } })
+
+        
+    </div>
+
+    <div class="form-group">
+        <h5>Ciudades</h5>        
+        @Html.DropDownListFor(m => m.ClientesTels.CiudadId, new SelectList(Model.cities , "Id", "Nombre"), new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

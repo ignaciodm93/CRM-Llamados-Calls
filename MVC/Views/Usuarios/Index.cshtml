@@ -1,0 +1,96 @@
+﻿@model MVC.Models.UsuariosModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuarios</h2>
+
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create", "Usuarios", new { @class = "btn btn-primary" })
+</p>
+<table class="table" id="dem">
+
+    <thead>
+        <tr>
+            <th>
+                Numero de Usuario
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Login
+            </th>
+            <th>
+                Clave
+            </th>
+
+            <th>
+                Mail
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ListarUsuarios)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelITem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Login)
+
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Clave)
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
+
+                <td>
+                    <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Edit", "Usuarios", new { id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                    <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("Details", "Usuarios", new { id = item.Id })"><i class="glyphicon glyphicon-file"></i></a>
+
+                    <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Delete", "Usuarios", new { id = item.Id })"><i class=" glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+
+@section scripts
+    {
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+
+    </script>
+
+}
+
+

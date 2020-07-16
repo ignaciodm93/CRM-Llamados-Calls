@@ -1,0 +1,88 @@
+﻿@model MVC.Models.ClientesDireccionesModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Direcciones Model</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="form-control-static">
+            <dt>
+                Calle
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CliDireccion.Calle)
+            </dd>
+      
+
+
+        
+            <dt>
+                Altura
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CliDireccion.Altura)
+
+            </dd>
+        
+
+        
+            <dt>
+                Piso
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CliDireccion.Piso)
+            </dd>
+        
+
+        <dt>
+            Departamento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CliDireccion.Dpto)
+        </dd>
+        </div>
+
+        <div class="form-control-static">
+            <dt>
+                Ciudad
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CliDireccion.Ciudades.Nombre)
+            </dd>
+
+
+            <dt>
+                Provincia
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CliDireccion.Ciudades.Provincias.Nombre)
+            </dd>
+
+            <dt>
+                Pais
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CliDireccion.Ciudades.Provincias.Paises.Nombre)
+            </dd>
+        </div>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.CliDireccion.Id  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

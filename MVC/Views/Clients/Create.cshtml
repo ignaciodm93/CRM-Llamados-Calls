@@ -1,0 +1,133 @@
+﻿@model MVC.Models.ClientesModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear nuevo</h2>
+
+@using (Html.BeginForm("Create", "Clients"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Clientes Model</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Cliente.Id)
+        
+
+    <div class="form-group row">
+
+        <div class="col-lg-4">
+
+            <div class="form-control-static">
+                <dt>Nombre</dt>
+                @Html.TextBoxFor(m => m.Cliente.Nombre, htmlAttributes: new { @class = "form-control input-lg" })
+            </div>
+
+            <div class="form-control-static">
+                <dt>Apellido</dt>
+                @Html.TextBoxFor(m => m.Cliente.Apellido, htmlAttributes: new { @class = "form-control input-lg" })
+            </div>
+
+
+            <div class="form-control-static">
+                <dt>Rubro</dt>
+                @Html.DropDownListFor(m => m.Cliente.RubroId, new SelectList(Model.ListaRubros, "Id", "Nombre"), "Seleccionar uno", htmlAttributes: new { @class = "form-control  input-lg" })
+                @Html.ValidationMessageFor(model => model.Cliente.RubroId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-control-static">
+                <dt>Fecha de Nacimiento</dt>
+                @Html.TextBoxFor(m => m.Cliente.FechaNacimiento, new { type = "date", @class = "form-control  input-lg" })
+                @Html.ValidationMessageFor(model => model.Cliente.FechaNacimiento, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="col-lg-4">
+
+            <div class="form-group">
+                Ciudad
+                @Html.DropDownListFor(m => m.Direccion.CiudadId, new SelectList(Model.ListaCiudades, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+
+                Calle
+                @Html.TextBoxFor(m => m.Direccion.Calle, htmlAttributes: new { @class = "form-control" })
+                <br />
+                Altura
+                @Html.TextBoxFor(m => m.Direccion.Altura, htmlAttributes: new { @class = "form-control" })
+                <br />
+                Piso
+                @Html.TextBoxFor(m => m.Direccion.Piso, htmlAttributes: new { @class = "form-control" })
+                <br />
+                Dpto
+                @Html.TextBoxFor(m => m.Direccion.Dpto, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+        </div>
+
+
+
+        <!--en construccion-->
+        <div class="col-lg-4">
+            <div class="form-group">
+
+                <div class="form-control-static">
+                    Telefono
+                    @Html.TextBoxFor(m => m.ClienteTelefono.Telefono, new { @type = "number", @class = "form-control" })
+                </div>
+
+                <div class="form-control-static">
+                    Ciudad del numero (queria hacer pais, a evaluar)
+                    @Html.DropDownListFor(m => m.ClienteTelefono.CiudadId, new SelectList(Model.ListaCiudades, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+
+                </div>
+
+                <div class="form-control-static">
+                    Correo
+                    @Html.TextBoxFor(m => m.ClienteMail.Mail, htmlAttributes: new { @type = "email", @class = "form-control" })
+                 
+                </div>
+
+                <div class="form-control-static">
+                    Fuentes de Contacto
+                    @Html.ListBoxFor(m => m.FuentesSeleccionadas, new SelectList(Model.ListaFuentes, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+                </div>
+
+ 
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="form-group row">
+
+        <div class="col-md-offset-2 col-md-3">
+            
+                @Html.ActionLink("Back to List", "Index")
+            
+        </div>
+
+        <span class="col-md-4"></span>
+
+        <div class="col-md-offset-2 col-md-3">
+            <input type="submit" value="Create" class="btn btn-info btn-lg pull-right" />
+        </div>
+
+
+    </div>
+    </div>
+}
+
+

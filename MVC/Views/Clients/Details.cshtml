@@ -1,0 +1,184 @@
+﻿@model MVC.Models.ClientesModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>
+        @Html.DisplayFor(m => m.Cliente.Nombre) @Html.DisplayFor(m => m.Cliente.Apellido)
+    </h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="form-control-static">
+            <dt>
+                Nombre
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cliente.Nombre)
+            </dd>
+        </div>
+
+        <dd></dd>
+
+        <div class="form-control-static">
+            <dt>
+                Apellido
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cliente.Apellido)
+            </dd>
+        </div>
+
+        <dd></dd>
+
+        <div class="form-control-static">
+            <dt>
+                Pais
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.Pais.Nombre)
+            </dd>
+        </div>
+
+
+
+        <div class="form-control-static">
+            <dt>
+                Id Cliente
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cliente.Id)
+
+            </dd>
+        </div>
+
+        <dd></dd>
+
+
+        <div class="form-control-static">
+            <dt>
+                Rubro
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cliente.Rubros.Nombre)
+            </dd>
+
+        </div>
+
+        <dd></dd>
+
+        <div class="form-control-static">
+
+            <dt>
+                Codigo del Rubro
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cliente.RubroId)
+            </dd>
+        </div>
+
+        <dd></dd>
+
+        <div class="form-control-static">
+            <dt>
+                Fecha de Nacimiento
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cliente.FechaNacimiento)
+            </dd>
+        </div>
+
+
+        <dd></dd>
+
+        <div class="form-control-static">
+            <dt>
+                Mail
+            </dt>
+            <!--Para llenar esto, aunque no sea un dato directo de la tabla Clientes, se puede replicar por el Include en el DAL.
+            El Mail ya posee (ya esta guardado) con el campo ClienteId que corresponde con el Id de este cliente en cuestion, entonces
+            es solo aplicar el include y luego podremos acceder usando la relacion automatica que se crea.
+            De esta forma no hace falta crear nuevos elementos en el model.
+            -->
+            <!--Esto puede ser usado por lo que entiendo solo con un foreach, que automaticamente linkea los ids y devuelve todos los que coincidan.-->
+            <!--Lo importante de esta forma de hacerlo, es que no necesito crear ningun metodo y por lo tanto, uso lo que ya tengo a disposición-->
+            @foreach (var item in Model.Cliente.Mails)
+            {
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </dd>
+
+            }
+        </div>
+
+
+
+        <div class="form-control-static">
+            <dt>
+                Dirección
+            </dt>
+            @foreach (var item in Model.Cliente.ClientesDirecciones)
+            {
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Calle)
+                    @Html.DisplayFor(modelItem => item.Altura) 
+                    @if (item.Piso != null)
+                    {<span>piso </span>
+                    @Html.DisplayFor(modelItem => item.Piso)
+                    }
+                    @if (item.Dpto != null)
+                    {<span>,departamento </span>
+                    @Html.DisplayFor(modelItem => item.Dpto)
+                    }<span>, @Html.DisplayFor(modelItem => item.Ciudades.Nombre).
+                    </span>
+                </dd>
+            }
+        </div>
+     
+
+        <div class="form-control-static">
+            <dt>Telefonos</dt>
+            <dd>
+                @foreach (var item in Model.Cliente.ClientesTelefonos)
+                {
+                    @Html.DisplayFor(modelItem => item.Telefono)<br />
+                }
+
+            </dd>
+        </div>
+
+
+        <div>
+            <dt>
+                Fuente de contacto
+            </dt>
+            <dd>
+                @foreach (var item in Model.Cliente.ClientesFuentesContacto)
+                {
+                    @Html.DisplayFor(modelItem => item.FuentesContacto.Nombre)<br />
+                }
+            </dd>
+
+        </div>
+
+
+
+
+        <!--end prueba-->
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cliente.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

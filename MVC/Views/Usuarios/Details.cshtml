@@ -1,0 +1,46 @@
+﻿@model MVC.Models.UsuariosModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Modelo de Usuario</h4>
+    <hr />
+
+
+
+    <dt class="form-group col-lg-2">
+        <h5 class="modal-title">Numero de Usuario</h5>
+        @Html.DisplayFor(m => m.Usuario.Id)
+    </dt>
+
+    <dt class="form-group  col-lg-2">
+        <h5 class="modal-title">Nombre de Usuario:</h5>
+        @Html.DisplayFor(m => m.Usuario.Nombre)
+    </dt>
+
+    <dt class="form-group col-lg-2">
+        <h5 class="modal-title">Logic de Usuario:</h5>
+        @Html.DisplayFor(m => m.Usuario.Login)
+    </dt>
+
+    <dt class="form-group col-lg-2">
+        <h5 class="modal-title">Clave de Usuario:</h5>
+        @Html.DisplayFor(m => m.Usuario.Clave)
+    </dt>
+
+    <dt class="form-group col-lg-2">
+        <h5 class="modal-title">Mail del Usuario:</h5>
+        @Html.DisplayFor(m => m.Usuario.Mail)
+    </dt>
+   
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.Usuario.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

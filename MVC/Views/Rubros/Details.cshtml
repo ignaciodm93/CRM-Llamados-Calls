@@ -1,0 +1,40 @@
+﻿@model MVC.Controllers.RubrosModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>RubrosModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="form-control-static">
+            <dt>
+                Rubro
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Rubro.Nombre)
+            </dd>
+        </div>
+
+        <div class="form-control-static">
+            <dt>
+                Codigo del Rubro
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Rubro.Id)
+            </dd>
+        </div>
+
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new {  id = Model.Rubro.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

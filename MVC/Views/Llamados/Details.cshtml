@@ -1,0 +1,132 @@
+﻿@model MVC.Models.LlamadosModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles del llamado</h2>
+
+<div>
+    <h4>
+        <dt>Numero de Llamado @Html.DisplayFor(m => m.Llamado.Id)</dt>
+
+    </h4>
+    <hr />
+
+
+    <div class="dl-horizontal bg-success img-rounded row divPad">
+        <div class="col-lg-6">
+
+
+
+            <div class="form-control-static">
+                <dt>
+                    Cliente que llama:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Llamado.Clientes.Nombre)
+                    @Html.DisplayFor(m => m.Llamado.Clientes.Apellido)
+
+                </dd>
+            </div>
+
+            <div class="form-control-static">
+                <dt>
+                    Cliente Id
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Llamado.ClienteId)
+
+                </dd>
+            </div>
+
+
+            <div class="form-control-static">
+                <dt>
+                    Destinatario del mensaje:
+                </dt>
+                <dd>
+                    @foreach (var item in Model.UsuariosDestinatariosCoincidentes)
+                    {
+                        <span>
+                            @Html.DisplayFor(modelItem => item.Nombre) (@Html.DisplayFor(modelItem => item.Login)) <br />
+                        </span>
+
+                    }
+                </dd>
+            </div>
+
+
+
+
+            <div class="form-control-static">
+                <dt>
+                    Fecha en la que se tomo:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Llamado.Fecha)
+                </dd>
+            </div>
+
+
+
+
+            <div class="form-control-static">
+                <dt>
+                    Usuario que atendió:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Llamado.Usuarios.Login)
+                    (
+                    @Html.DisplayFor(m => m.Llamado.Usuarios.Nombre)
+                    )
+
+                </dd>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-lg-5">
+            <div class="form-control-static">
+                <!--resultado de tabla intermedia-->
+                <dt>
+                    Motivo del llamado:
+                </dt>
+
+                <dd>
+                    @foreach (var item in Model.MotivosCoincidentes) //WORKS!
+                    {
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                        <br />
+                    }
+                </dd>
+            </div>
+
+            
+                <div class="form-control-static">
+                    <dt>
+                        Mensaje:
+                    </dt>
+                    <dd>
+                        @Html.DisplayTextFor(m => m.Llamado.DescripcionLLamado)
+                    </dd>
+                </div>
+            
+
+
+
+
+        </div>
+
+
+
+    </div>
+    <br />
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Llamado.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

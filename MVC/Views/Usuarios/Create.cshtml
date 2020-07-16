@@ -1,0 +1,58 @@
+﻿@model MVC.Models.UsuariosModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear un nuevo usuario</h2>
+
+@using (Html.BeginForm("Create", "Usuarios", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Referencia: UsuariosModel</h4>
+    <hr />
+
+
+    <div class="form-group">
+        <h5>Nombre</h5>
+        @Html.TextBoxFor(m => m.Usuario.Nombre)
+    </div>
+
+    <div class="form-group">
+        <h5>Login</h5>
+        @Html.TextBoxFor(m => m.Usuario.Login)
+    </div>
+
+    <div class="form-group">
+        <h5>Clave</h5>
+        @Html.TextBoxFor(m => m.Usuario.Clave)
+    </div>
+
+    <div class="form-group">
+        <h5>Mail*</h5>
+        @Html.TextBoxFor(m => m.Usuario.Mail)
+    </div>
+
+
+
+
+
+
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

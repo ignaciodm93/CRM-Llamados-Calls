@@ -1,0 +1,62 @@
+﻿@model MVC.Models.UsuariosModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UsuariosModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Nombre del Usuario</h5>
+            @Html.DisplayFor(m => m.Usuario.Id, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+
+        <div class="form-group col-md-10 m">
+            <h5 class="control-label col-lg-3">Nombre del Usuario</h5>
+            @Html.DisplayFor(m => m.Usuario.Nombre, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Nombre del Usuario</h5>
+            @Html.DisplayFor(m => m.Usuario.Login, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Nombre del Usuario</h5>
+            @Html.DisplayFor(m => m.Usuario.Clave, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Nombre del Usuario</h5>
+            @Html.DisplayFor(m => m.Usuario.Mail, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

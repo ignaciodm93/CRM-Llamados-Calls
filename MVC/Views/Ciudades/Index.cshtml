@@ -1,0 +1,91 @@
+﻿@model MVC.Models.CiudadesModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ciudades Index</h2>
+<p>
+    @Html.ActionLink("Crear nueva", "Crear", "Ciudades", new { @class = "btn btn-primary" })
+</p>
+<table class="table" id="dem">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ciudad.Nombre)
+            </th>
+            <th>
+                Codigo de Ciudad
+
+
+            </th>
+            <th>
+                Provincia
+            </th>
+
+            <th>
+
+
+                Provincia Id
+
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Ciudades)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Id)
+
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Provincias.Nombre)
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provincias.Id)
+                </td>
+
+                <td>
+                    <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Editar", "Ciudades", new { id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                    <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("GetCiudad", "Ciudades", new { id = item.Id })"><i class="glyphicon glyphicon-file"></i></a>
+
+                    <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Eliminar", "Ciudades", new { id = item.Id })"><i class=" glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+
+@section scripts
+    {
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+
+    </script>
+
+}

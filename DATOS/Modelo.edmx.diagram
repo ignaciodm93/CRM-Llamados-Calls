@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c550f33964d54f3aa6868a4a23e21632" Name="Diagram1">
+        <EntityTypeShape EntityType="ABM11Model.Ciudades" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Clientes" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.ClientesDirecciones" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.ClientesFuentesContacto" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.ClientesTelefonos" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.FuentesContacto" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Llamados" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.LlamadosDestinatarios" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.LlamadosMotivosLlamados" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Mails" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.MotivosLlamado" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Paises" Width="1.5" PointX="1.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Provincias" Width="1.5" PointX="3.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Rubros" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.sysdiagrams" Width="1.5" PointX="10.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ABM11Model.Usuarios" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="ABM11Model.FK__Ciudades__Provin__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__ClientesD__Ciuda__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__ClientesT__Ciuda__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__Clientes__RubroI__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__ClientesD__Clien__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__ClientesF__Clien__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__ClientesT__Clien__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__Llamados__Client__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__Mails__ClienteId__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__ClientesF__Fuent__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__Llamados__Usuari__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__LlamadosD__Llama__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__LlamadosM__Llama__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__LlamadosD__Usuar__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__LlamadosM__Motiv__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ABM11Model.FK__Provincia__PaisI__3A81B327" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,72 @@
+﻿@model MVC.Models.MotivosLlamadoModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Agregar nuevo motivo", "Create", "MotivosLlamado",  new { @class = "btn btn-primary" })
+</p>
+
+
+<table class="table" id="dem">
+
+    <thead>
+
+        <tr>
+            <th>
+                Motivos de llamados
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.ListaMotivos)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+
+                </td>
+
+                <td>
+                    <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Edit", "MotivosLlamado", new { id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                    <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("Details", "MotivosLlamado", new { id = item.Id })"><i class="glyphicon glyphicon-file"></i></a>
+
+                    <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Delete", "MotivosLlamado", new { id = item.Id })"><i class=" glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+
+
+        }
+
+
+
+
+    </tbody>
+
+</table>
+
+@section scripts
+    {
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+
+    </script>
+
+}

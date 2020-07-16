@@ -1,0 +1,37 @@
+﻿@model MVC.Models.MotivosLlamadoModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MotivosLlamadoModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Id Motivo
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.MotivoLlamado.Id)
+        </dd>
+
+        <dt>
+            Nombre del motivo
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.MotivoLlamado.Nombre)
+        </dd>
+
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.MotivoLlamado.Id  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,73 @@
+﻿@model MVC.Models.ClientesTelefonosModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Telefonos Clientes</h2>
+
+<p>
+    @Html.ActionLink("Agregar nuevo", "Create", "ClientesTelefonos", new { @class = "btn btn-primary" })
+</p>
+
+<table class="table" id="dem">
+    
+    <thead>
+        <tr>
+            <th>
+                Telefono
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Ciudad
+            </th>
+            <th>
+                <!--Para el plugin-->
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model.CliTelsLista )
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clientes.Nombre)
+                @Html.DisplayFor(modelItem => item.Clientes.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ciudades.Nombre)
+               
+            </td>
+
+            <td>
+                <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Edit", "ClientesTelefonos",new { n = item.Telefono, c = item.ClienteId })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("Details", "ClientesTelefonos", new { n = item.Telefono, c = item.ClienteId })"><i class="glyphicon glyphicon-file"></i></a>
+
+                <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Delete", "ClientesTelefonos", new { n = item.Telefono, c = item.ClienteId })"><i class=" glyphicon glyphicon-trash"></i></a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+
+@section scripts
+    {
+
+    <script>
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+    </script>
+
+    }

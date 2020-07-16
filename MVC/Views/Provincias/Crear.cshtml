@@ -1,0 +1,50 @@
+﻿@model MVC.Models.ProvinciasModel
+
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear</h2>
+
+@using (Html.BeginForm("Crear", "Provincias"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Provincias</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Provincia.Id)
+
+    <div class="form-group">
+        <h5 class="control-label col-lg-3">Nombre Provincia</h5>
+        @Html.TextBoxFor(m => m.Provincia.Nombre, htmlAttributes: new { @class = "form-control" })
+
+        <div class="col-md">
+            <h5 class="control-label col-lg-3">Pais</h5>
+
+            <div class="form-control-static">
+                @Html.DropDownListFor(m => m.Provincia.PaisId, new SelectList(Model.country, "Id", "Nombre"), new { htmlAttributes = new { @class = "" } })
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Provincia.Nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-info btn-xs" />
+
+                <a class="btn btn-info btn-xs" href="@Url.Action("Index", "Provincias")"><i class="glyphicon glyphicon-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+

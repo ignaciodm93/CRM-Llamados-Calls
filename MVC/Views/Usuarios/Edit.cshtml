@@ -1,0 +1,51 @@
+﻿@model MVC.Models.UsuariosModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Usuarios", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>UsuariosModel</h4>
+        <hr />
+        @Html.HiddenFor(m => m.Usuario.Id)
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Nombre del Usuario</h5>
+            @Html.EditorFor(m => m.Usuario.Nombre, new { HtmlAttributes = new { @class="form-control" } })
+        </div>
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Login del Usuario</h5>
+            @Html.EditorFor(m => m.Usuario.Login, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Clave del Usuario</h5>
+            @Html.EditorFor(m => m.Usuario.Clave, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-10">
+            <h5 class="control-label col-lg-3">Mail del Usuario</h5>
+            @Html.EditorFor(m => m.Usuario.Mail, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

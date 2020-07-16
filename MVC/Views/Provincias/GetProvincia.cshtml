@@ -1,0 +1,49 @@
+﻿@model MVC.Models.ProvinciasModel
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>ProvinciasModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Provincia.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provincia.Nombre)
+        </dd>
+
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Provincia.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provincia.Id)
+
+        </dd>
+
+        <dt>
+            Pais
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provincia.Paises.Nombre)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.Provincia.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

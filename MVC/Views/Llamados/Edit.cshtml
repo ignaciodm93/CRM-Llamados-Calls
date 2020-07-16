@@ -1,0 +1,178 @@
+﻿@model MVC.Models.LlamadosModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var staffList = Model.ListaClientes.Select(s => new { Value = s.Id, Text = $"{s.Nombre} {s.Apellido}" });
+    var staffSelect = new SelectList(staffList, "Value", "Text");
+}
+
+<h2>Modificar Llamado</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="form-horizontal">
+    <h4 class="form-control-static container-fluid">
+        <dt>Codigo de llamado: @Html.DisplayFor(m => m.Llamado.Id)</dt>
+    </h4>
+
+
+    @Html.HiddenFor(m => m.Llamado.Id)
+
+    <div class="row  ">
+        <div class="col-lg-6 ">
+
+
+            <div class="form-control-static container-fluid  bg-info img-rounded nuevoDiv">
+                <h5 class="">Cliente que llama</h5>
+
+                @Html.ValidationMessageFor(model => model.Llamado.ClienteId, "", new { @class = "text-danger" })
+
+                @Html.DropDownListFor(m => m.Llamado.ClienteId, new SelectList(staffSelect, "Value", "Text"), htmlAttributes: new { @class = "form-control  input-md" })
+            </div>
+
+            <br />
+
+            <div class="form-control-static container-fluid  bg-info img-rounded nuevoDiv">
+                <h5>Fecha del llamado</h5>
+                @Html.TextBoxFor(m => m.Llamado.Fecha, new { @type = "datetime", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Llamado.Fecha, "", new { @class = "text-danger" })
+            </div>
+
+            <br />
+
+            <div class="form-control-static container-fluid  bg-info img-rounded nuevoDiv">
+                <h5>Descripcion de llamado</h5>
+                @Html.TextAreaFor(m => m.Llamado.DescripcionLLamado, new { @class = "form-control f", @id = "txaMessage" })
+                <div class="form-control-static text-center">Caracteres disponibles: <span class="valid-text pt-1" id="txaCount">300</span></div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+        <div class="col-lg-6">
+
+            <div class="form-control-static container-fluid  bg-info img-rounded nuevoDiv">
+                <h5>Usuario que atiende</h5><!--arreglar-->
+                @Html.DropDownListFor(m => m.Llamado.UsuarioAtiendeId, new SelectList(Model.ListaUsuarios, "Id", "Login"), "Seleccionar uno", htmlAttributes: new { @class = "form-control  input-md" })
+
+            </div>
+
+            <br />
+
+            <div class="form-control-static container-fluid  bg-info img-rounded nuevoDiv">
+                <h5>Destinatario/s</h5>
+                <div class="col-md-6">
+                    @Html.ListBoxFor(m => m.DestinatariosSeleccionados, new SelectList(Model.ListaUsuarios, "Id", "Login"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    Actuales destinatarios guardados:<br />
+                    @foreach (var item in Model.UsuariosDestinatariosCoincidentes)
+                    {
+                        @Html.DisplayFor(modelItem => item.Login)<br />
+                    }
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-control-static container-fluid  bg-info img-rounded nuevoDiv">
+                <h5>Motivo/s</h5>
+                <div class="col-md-6">
+                    @Html.ListBoxFor(m => m.MotivosSeleccionados, new SelectList(Model.ListaMotivos, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    Actuales motivos guardados:<br />
+                    @foreach (var item in Model.MotivosCoincidentes)
+                    {
+                        @Html.DisplayFor(modelItem => item.Nombre)<br />
+                    }
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <div class="row">
+        <br />
+        <div class="col-lg-4">
+            <a class=" btn btn-group-sm btn-lg center-block " title="Index" href="@Url.Action("Index", "Llamados", null)">
+                Volver al Inicio
+            </a>
+        </div>
+     
+        
+        <div class="col-lg-4">
+            <input type="submit" value="Save" class="btn btn-success btn-lg center-block">
+        </div>
+       
+      
+
+        <div class="col-lg-4">
+            <a class=" btn btn-group-sm btn-lg center-block" title="Detalles" href="@Url.Action("Details", "Llamados", new { id = Model.Llamado.Id })">
+                Volver a Detalles
+            </a>
+        </div>
+
+        
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <br />
+
+</div>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var limit = 300;
+            $("#txaMessage").keydown(function (event) {
+                var value = limit - $(this).val().length;
+
+                if (value <= 0) {
+                    $('#txaMessage').removeClass('is-valid');
+                    $('#txaMessage').addClass('is-invalid');
+                    $('#txaCount').html(value);
+                    $('#txaCount').removeClass('valid-text');
+                    $('#txaCount').addClass('invalid-text');
+                } else if (value > 0) {
+                    $('#txaMessage').removeClass('is-invalid');
+                    $('#txaMessage').addClass('is-valid');
+                    $('#txaCount').html(value);
+                    $('#txaCount').removeClass('invalid-text');
+                    $('#txaCount').addClass('valid-text');
+                }
+            });
+        });</script>
+
+
+
+
+
+}

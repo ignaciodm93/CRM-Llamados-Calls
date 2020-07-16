@@ -1,0 +1,121 @@
+﻿@model MVC.Models.ClientesModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clientes</h2>
+<p>
+    @Html.ActionLink("Agregar Nuevo", "Create", "Clients", new { @class = "btn btn-primary crear" })
+</p>
+<table class="table" id="dem">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.Apellido)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.Nombre)
+            </th>
+
+            <th>
+                Numero de Cliente
+            </th>
+            <th>
+                Rubro
+            </th>
+
+            <!--
+            <th>
+                Codigo de Rubro
+            </th>
+
+
+
+                <th>
+                    Fecha de Nacimiento
+                </th>
+            -->
+
+           
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ListaClientes)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Rubros.Nombre)
+            </td>
+
+            <!--
+        <td>
+            Html.DisplayFor(modelItem => item.RubroId)
+        </td>
+
+            <td>
+                item.FechaNacimiento.Value.ToString("yyyy-MM-dd")
+            Este render lo saco para que se muestre en detalles, no me parece TAN necesario aca
+            </td>
+
+
+
+    -->
+
+            <!--Prueba 9.5.20
+            
+            Html.DisplayFor(modelItem => modelItem.Cliente.ClientesDirecciones )
+            
+            End Prueba 9.5.20-->
+         
+
+            <td>
+                <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Edit", "Clients", new { id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("Details", "Clients", new { id = item.Id })"><i class="glyphicon glyphicon-file"></i></a>
+
+                <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Delete", "Clients", new { id = item.Id })"><i class=" glyphicon glyphicon-trash"></i></a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+
+@section scripts
+    {
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+
+    </script>
+
+}

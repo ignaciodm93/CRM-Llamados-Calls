@@ -1,0 +1,154 @@
+﻿@model MVC.Models.LlamadosModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+   var staffList = Model.ListaClientes.Select(s => new { Value = s.Id, Text = $"{s.Nombre} {s.Apellido}" });
+    var staffSelect = new SelectList(staffList, "Value", "Text");
+    
+}
+
+<h2>Nuevo llamado</h2>
+
+@using (Html.BeginForm("Create", "Llamados", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Guardar</h4>
+    <hr />
+
+
+    <div class="form-group  bg-info row ">
+
+
+        <div class="col-md-6">
+            <div class="col-md">
+                <h5 class="control-label col-lg-3">Cliente que llama</h5>
+                <div class="form-control-static">
+
+                    @Html.DropDownListFor(m => m.Llamado.ClienteId, new SelectList(staffSelect, "Value", " Text"), "Please select", htmlAttributes: new { @class = "form-control  input-lg" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Llamado.ClienteId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md">
+                <h5 class="control-label col-lg-3">Destinatarios</h5>
+                <div class="form-control-static">
+
+                    @Html.ListBoxFor(m => m.DestinatariosSeleccionados, new SelectList(Model.ListaUsuarios, "Id", "Login"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ListaUsuarios, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md">
+                <h5 class="control-label col-lg-3">Fecha del llamado</h5>
+                <div class="form-control-static">
+                    @Html.TextBoxFor(m => m.Llamado.Fecha, new { type = "date", @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Llamado.Fecha, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-mb-3">
+                <h5 class="control-label col-lg-3">Motivo del llamado</h5>
+                <div class="form-control-static" id="check">
+
+
+                    <!--Html.ListBoxFor(m => m.result, new SelectList(Model.ListaMotivos, "Id", "Nombre"))-->
+                    @Html.ListBoxFor(m => m.MotivosSeleccionados, new SelectList(Model.ListaMotivos, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <br />
+
+        </div>
+
+
+
+
+        @Html.HiddenFor(m => m.Llamado.Id)
+
+
+
+
+
+        <div class="col-md-6">
+
+
+            <div class="col-md">
+                <h5 class="control-label col-lg-3">Tomó el llamado</h5>
+                <div class="form-control-static">
+                    @Html.DropDownListFor(m => m.Llamado.UsuarioAtiendeId, new SelectList(Model.ListaUsuarios, "Id", "Login"), "Please select", htmlAttributes: new { @class = "form-control  input-md" })
+                </div>
+                @Html.ValidationMessageFor(model => model.ListaUsuarios, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="col-mb-3">
+                <h5 class="control-label col-lg-3">Mensaje</h5>
+                <div class="form-control-static">
+                    @Html.TextAreaFor(m => m.Llamado.DescripcionLLamado, new { @class = "form-control f", @id = "txaMessage" })
+                    <div class="form-control-static text-center">Caracteres disponibles: <span class="valid-text pt-1" id="txaCount">300</span></div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Llamado.DescripcionLLamado, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+   
+
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+@section scripts
+    {
+    <script>$(document).ready(function() {
+        var limit = 300;
+        $("#txaMessage").keydown(function(event) {
+        var value = limit - $(this).val().length;
+
+        if (value <= 0) {
+        $('#txaMessage').removeClass('is-valid');
+        $('#txaMessage').addClass('is-invalid');
+        $('#txaCount').html(value);
+        $('#txaCount').removeClass('valid-text');
+        $('#txaCount').addClass('invalid-text');
+        } else if (value > 0) {
+        $('#txaMessage').removeClass('is-invalid');
+        $('#txaMessage').addClass('is-valid');
+        $('#txaCount').html(value);
+        $('#txaCount').removeClass('invalid-text');
+        $('#txaCount').addClass('valid-text');
+        }
+        });
+        });</script>
+
+
+
+
+
+}

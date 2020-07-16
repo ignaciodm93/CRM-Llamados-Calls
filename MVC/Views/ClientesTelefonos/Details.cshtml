@@ -1,0 +1,93 @@
+﻿@model MVC.Models.ClientesTelefonosModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ClientesTelefonosModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+
+<div>
+    <h4>Telefonos Clis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="form-control-static">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClientesTels.Telefono)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientesTels.Telefono)
+            </dd>
+        </div>
+
+        <div class="form-control-static">
+            <dt>
+                Cliente Id
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientesTels.Clientes.Id)
+
+            </dd>
+        </div>
+
+
+        <div class="form-control-static">
+            <dt>
+                Cliente
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientesTels.Clientes.Nombre)
+                @Html.DisplayFor(model => model.ClientesTels.Clientes.Apellido)
+            </dd>
+        </div>
+
+        <div class="form-control-static">
+            <dt>
+                Ciudad
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientesTels.Ciudades.Nombre)
+            </dd>
+        </div>
+
+        <div class="form-control-static">
+            <dt>
+                Provincia
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientesTels.Ciudades.Provincias.Nombre)
+            </dd>
+        </div>
+
+        <div class="form-control-static">
+            <dt>
+                Pais
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientesTels.Ciudades.Provincias.Paises.Nombre)
+            </dd>
+        </div>
+
+
+    </dl>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

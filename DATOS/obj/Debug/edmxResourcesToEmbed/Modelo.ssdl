@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ABM11Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ciudades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" />
+    <Property Name="ProvinciaId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Apellido" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="RubroId" Type="tinyint" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ClientesDirecciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Calle" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Altura" Type="smallint" Nullable="false" />
+    <Property Name="Dpto" Type="varchar" MaxLength="4" />
+    <Property Name="Piso" Type="tinyint" />
+    <Property Name="CiudadId" Type="int" Nullable="false" />
+    <Property Name="ClienteId" Type="smallint" />
+  </EntityType>
+  <EntityType Name="ClientesFuentesContacto">
+    <Key>
+      <PropertyRef Name="ClienteId" />
+      <PropertyRef Name="FuenteContactoId" />
+    </Key>
+    <Property Name="ClienteId" Type="smallint" Nullable="false" />
+    <Property Name="FuenteContactoId" Type="tinyint" Nullable="false" />
+    <Property Name="fc" Type="bit" />
+  </EntityType>
+  <EntityType Name="ClientesTelefonos">
+    <Key>
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="ClienteId" />
+    </Key>
+    <Property Name="Telefono" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="ClienteId" Type="smallint" Nullable="false" />
+    <Property Name="CiudadId" Type="int" />
+  </EntityType>
+  <EntityType Name="FuentesContacto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="12" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Llamados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClienteId" Type="smallint" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="DescripcionLLamado" Type="varchar" MaxLength="300" />
+    <Property Name="UsuarioAtiendeId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="LlamadosDestinatarios">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+      <PropertyRef Name="LlamadoId" />
+    </Key>
+    <Property Name="UsuarioId" Type="tinyint" Nullable="false" />
+    <Property Name="LlamadoId" Type="int" Nullable="false" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="LlamadosMotivosLlamados">
+    <Key>
+      <PropertyRef Name="LlamadoId" />
+      <PropertyRef Name="MotivoLlamadoId" />
+    </Key>
+    <Property Name="LlamadoId" Type="int" Nullable="false" />
+    <Property Name="MotivoLlamadoId" Type="tinyint" Nullable="false" />
+    <Property Name="b" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClienteId" Type="smallint" />
+    <Property Name="Mail" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MotivosLlamado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="12" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Provincias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PaisId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Rubros">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Mail" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Ciudades__Provin__3D5E1FD2">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincias">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ciudades">
+        <PropertyRef Name="ProvinciaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clientes__RubroI__4316F928">
+    <End Role="Rubros" Type="Self.Rubros" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rubros">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="RubroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientesD__Ciuda__45F365D3">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="ClientesDirecciones" Type="Self.ClientesDirecciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientesDirecciones">
+        <PropertyRef Name="CiudadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientesD__Clien__46E78A0C">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="ClientesDirecciones" Type="Self.ClientesDirecciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientesDirecciones">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientesF__Clien__4CA06362">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="ClientesFuentesContacto" Type="Self.ClientesFuentesContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientesFuentesContacto">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientesF__Fuent__4D94879B">
+    <End Role="FuentesContacto" Type="Self.FuentesContacto" Multiplicity="1" />
+    <End Role="ClientesFuentesContacto" Type="Self.ClientesFuentesContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuentesContacto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientesFuentesContacto">
+        <PropertyRef Name="FuenteContactoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientesT__Ciuda__5165187F">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="0..1" />
+    <End Role="ClientesTelefonos" Type="Self.ClientesTelefonos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientesTelefonos">
+        <PropertyRef Name="CiudadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientesT__Clien__5070F446">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="ClientesTelefonos" Type="Self.ClientesTelefonos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientesTelefonos">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Llamados__Client__5812160E">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Llamados" Type="Self.Llamados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Llamados">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Llamados__Usuari__59063A47">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Llamados" Type="Self.Llamados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Llamados">
+        <PropertyRef Name="UsuarioAtiendeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LlamadosD__Llama__6383C8BA">
+    <End Role="Llamados" Type="Self.Llamados" Multiplicity="1" />
+    <End Role="LlamadosDestinatarios" Type="Self.LlamadosDestinatarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Llamados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LlamadosDestinatarios">
+        <PropertyRef Name="LlamadoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LlamadosD__Usuar__628FA481">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="LlamadosDestinatarios" Type="Self.LlamadosDestinatarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LlamadosDestinatarios">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LlamadosM__Llama__5EBF139D">
+    <End Role="Llamados" Type="Self.Llamados" Multiplicity="1" />
+    <End Role="LlamadosMotivosLlamados" Type="Self.LlamadosMotivosLlamados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Llamados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LlamadosMotivosLlamados">
+        <PropertyRef Name="LlamadoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LlamadosM__Motiv__5FB337D6">
+    <End Role="MotivosLlamado" Type="Self.MotivosLlamado" Multiplicity="1" />
+    <End Role="LlamadosMotivosLlamados" Type="Self.LlamadosMotivosLlamados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MotivosLlamado">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LlamadosMotivosLlamados">
+        <PropertyRef Name="MotivoLlamadoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Mails__ClienteId__6754599E">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Mails" Type="Self.Mails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mails">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Provincia__PaisI__3A81B327">
+    <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Provincias">
+        <PropertyRef Name="PaisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ABM11ModelStoreContainer">
+    <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientesDirecciones" EntityType="Self.ClientesDirecciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientesFuentesContacto" EntityType="Self.ClientesFuentesContacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientesTelefonos" EntityType="Self.ClientesTelefonos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuentesContacto" EntityType="Self.FuentesContacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Llamados" EntityType="Self.Llamados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LlamadosDestinatarios" EntityType="Self.LlamadosDestinatarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LlamadosMotivosLlamados" EntityType="Self.LlamadosMotivosLlamados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mails" EntityType="Self.Mails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MotivosLlamado" EntityType="Self.MotivosLlamado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Ciudades__Provin__3D5E1FD2" Association="Self.FK__Ciudades__Provin__3D5E1FD2">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="Ciudades" EntitySet="Ciudades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clientes__RubroI__4316F928" Association="Self.FK__Clientes__RubroI__4316F928">
+      <End Role="Rubros" EntitySet="Rubros" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientesD__Ciuda__45F365D3" Association="Self.FK__ClientesD__Ciuda__45F365D3">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="ClientesDirecciones" EntitySet="ClientesDirecciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientesD__Clien__46E78A0C" Association="Self.FK__ClientesD__Clien__46E78A0C">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="ClientesDirecciones" EntitySet="ClientesDirecciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientesF__Clien__4CA06362" Association="Self.FK__ClientesF__Clien__4CA06362">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="ClientesFuentesContacto" EntitySet="ClientesFuentesContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientesF__Fuent__4D94879B" Association="Self.FK__ClientesF__Fuent__4D94879B">
+      <End Role="FuentesContacto" EntitySet="FuentesContacto" />
+      <End Role="ClientesFuentesContacto" EntitySet="ClientesFuentesContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientesT__Ciuda__5165187F" Association="Self.FK__ClientesT__Ciuda__5165187F">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="ClientesTelefonos" EntitySet="ClientesTelefonos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientesT__Clien__5070F446" Association="Self.FK__ClientesT__Clien__5070F446">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="ClientesTelefonos" EntitySet="ClientesTelefonos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Llamados__Client__5812160E" Association="Self.FK__Llamados__Client__5812160E">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Llamados" EntitySet="Llamados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Llamados__Usuari__59063A47" Association="Self.FK__Llamados__Usuari__59063A47">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Llamados" EntitySet="Llamados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LlamadosD__Llama__6383C8BA" Association="Self.FK__LlamadosD__Llama__6383C8BA">
+      <End Role="Llamados" EntitySet="Llamados" />
+      <End Role="LlamadosDestinatarios" EntitySet="LlamadosDestinatarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LlamadosD__Usuar__628FA481" Association="Self.FK__LlamadosD__Usuar__628FA481">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="LlamadosDestinatarios" EntitySet="LlamadosDestinatarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LlamadosM__Llama__5EBF139D" Association="Self.FK__LlamadosM__Llama__5EBF139D">
+      <End Role="Llamados" EntitySet="Llamados" />
+      <End Role="LlamadosMotivosLlamados" EntitySet="LlamadosMotivosLlamados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LlamadosM__Motiv__5FB337D6" Association="Self.FK__LlamadosM__Motiv__5FB337D6">
+      <End Role="MotivosLlamado" EntitySet="MotivosLlamado" />
+      <End Role="LlamadosMotivosLlamados" EntitySet="LlamadosMotivosLlamados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Mails__ClienteId__6754599E" Association="Self.FK__Mails__ClienteId__6754599E">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Mails" EntitySet="Mails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Provincia__PaisI__3A81B327" Association="Self.FK__Provincia__PaisI__3A81B327">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="Provincias" EntitySet="Provincias" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

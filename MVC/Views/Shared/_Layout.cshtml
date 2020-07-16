@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li></li>
+
+
+                    <!--cominezo dropdown Llamados-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="lightme">
+                                <i class="glyphicon glyphicon-earphone"></i>
+                              Llamados</span>  <span class="caret"></span>
+</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Llamados", "Index", "Llamados")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Nuevo Llamado", "Create", "Llamados")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Motivos de Llamado", "Index", "MotivosLlamados")</a></li>
+                        </ul>
+                    </li>
+                    <!--fin dropdown-->
+                    <!--cominezo dropdown Clientes General-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="lightme">
+                                <i class="glyphicon glyphicon-user"></i>
+                                 Clientes General</span> <span class="caret"></span>
+</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Clientes", "Index", "Clients")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Direcciones", "Index", "ClientesDirecciones")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Telefonos", "Index", "ClientesTelefonos")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Mails", "Index", "Mails")</a></li>
+                        </ul>
+                    </li>
+                    <!--fin dropdown-->
+                    <!--cominezo dropdown Clientes General-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="lightme">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                 Locaciones</span><span class="caret"></span>
+</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Direcciones", "Index", "ClientesDirecciones")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Ciudades", "Index", "Ciudades")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Provincias", "Index", "Provincias")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Paises", "Index", "Ciudades")</a></li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+                    <!--cominezo dropdown Rubros-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="lightme">
+                                <i class="glyphicon glyphicon-briefcase"></i>
+                                Rubros</span> <span class="caret"></span>
+</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Rubros", "Index", "Rubros")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Agregar Rubro", "Create", "Rubros")</a></li>
+                        </ul>
+                    </li>
+                    <!--fin dropdown-->
+                    <!--cominezo dropdown FUENTES DE CONTACTO-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="lightme">
+                                <i class="glyphicon glyphicon-bullhorn"></i>
+                                Fuentes de Contacto
+                            </span><span class="caret"></span>
+</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Fuentes de Contacto", "Index", "FuentesContactos")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Agregar Fuente", "Create", "FuentesContactos")</a></li>
+                        </ul>
+                    </li>
+                    <!--fin dropdown-->
+                    <!--cominezo dropdown USUARIOS-->
+
+                   
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="lightme">
+                                <i class="glyphicon glyphicon-pawn "></i>
+                                Usuarios
+                            </span> <span class="caret"></span>
+</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Usuarios", "Index", "Usuarios")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Nuevo usuario", "Create", "Usuarios")</a></li>
+                        </ul>
+                    </li>
+                    <!--fin dropdown-->
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
+</body>
+</html>

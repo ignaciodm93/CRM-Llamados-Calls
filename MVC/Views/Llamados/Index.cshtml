@@ -1,0 +1,112 @@
+﻿@model MVC.Models.LlamadosModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+
+<h2>Llamados</h2>
+<p>
+    @Html.ActionLink("Nuevo registro", "Create", "Llamados", new { @class = "btn btn-primary" })
+</p>
+<table class="table" id="dem">
+
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+
+            <th>
+                Cliente
+            </th>
+
+            <th>
+                Fecha del llamado
+            </th>
+            <th>
+                Descripcion Llamado
+            </th>
+
+            <th>
+                Usuario
+            </th>
+
+
+
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ListaLlamados)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clientes.Nombre)
+                    @Html.DisplayFor(modelItem => item.Clientes.Apellido)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+
+                <td>
+                  
+                    <div class="c">
+                        @Html.DisplayFor(modelItem => item.DescripcionLLamado)
+                    </div>
+                    
+                    
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsuarioAtiendeId)
+                   
+
+            
+                </td>
+
+
+                <td>
+                    <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Edit", "Llamados", new { id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                    <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("Details", "Llamados", new { id = item.Id })"><i class="glyphicon glyphicon-file"></i></a>
+
+                    <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Delete", "Llamados", new { id = item.Id })"><i class=" glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+
+@section scripts
+    {
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+
+    </script>
+
+}

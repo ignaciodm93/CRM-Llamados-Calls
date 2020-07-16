@@ -1,0 +1,70 @@
+﻿@model MVC.Controllers.RubrosModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rubros</h2>
+
+<p>
+    @Html.ActionLink("Agregar Rubro", "Create", "Rubros", new { @class = "btn btn-primary" })
+</p>
+
+<table  class="table" id="dem">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rubro.Nombre)
+            </th>
+            <th>
+                Numero de Rubro
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.rubros)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+
+                <td>
+                    <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Edit", "Rubros", new { id = item.Id })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                    <a class="btn btn-success btn-xs" title="Detalles" href="@Url.Action("Details", "Rubros", new { id = item.Id })"><i class="glyphicon glyphicon-file"></i></a>
+
+                    <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Delete", "Rubros", new { id = item.Id })"><i class=" glyphicon glyphicon-trash"></i></a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+
+@section scripts
+    {
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#dem').DataTable();
+        });
+
+    </script>
+
+}

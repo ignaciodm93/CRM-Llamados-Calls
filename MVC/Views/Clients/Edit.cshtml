@@ -1,0 +1,308 @@
+﻿@model MVC.Models.ClientesModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Cliente</h2>
+
+@using (Html.BeginForm("Edit", "Clients", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>
+            @Html.DisplayFor(m => m.Cliente.Nombre) @Html.DisplayFor(m => m.Cliente.Apellido)
+        </h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Cliente.Id)
+        <div class="row ">
+
+            <div class="col-lg-6">
+
+
+                <div class="form-control-static  bg-info  img-rounded container-fluid nuevoDiv">
+                    <dl class="form-control-static">
+                        <dt>Nombre</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.Cliente.Nombre, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Cliente.Nombre, "", new { @class = "text-danger" })
+                        </dd>
+                    </dl>
+
+                    <dl class="form-control-static ">
+                        <dt>Apellido</dt>
+                        <dd>
+                            @Html.TextBoxFor(m => m.Cliente.Apellido, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Cliente.Apellido, "", new { @class = "text-danger" })
+                        </dd>
+                    </dl>
+                </div>
+
+                <br />
+
+                <dl class="form-control-static  bg-info  img-rounded container-fluid nuevoDiv">
+                    <dt>Direccion</dt>
+
+                    @if (Model.Domicilios != null)
+                    {
+                        for (int i = 0; i < Model.Domicilios.Count; i++)
+                        {
+                            <span>Ciudad</span>
+                            @Html.DropDownListFor(m => m.Domicilios[i].CiudadId, new SelectList(Model.ListaCiudades, "Id", "Nombre", Model.Domicilios[i].CiudadId), htmlAttributes: new { @class = "form-control input-sm" })
+                            <div class="form-group row">
+
+
+
+
+
+                                <div class="col-sm-6">
+                                    <span>Calle: </span>@Html.TextBoxFor(m => m.Domicilios[i].Calle, htmlAttributes: new { @class = "form-control input-sm" })
+                                    <span>Altura: </span>@Html.TextBoxFor(m => m.Domicilios[i].Altura, htmlAttributes: new { @class = "form-control input-sm" })
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <span>Piso</span>  @Html.EditorFor(model => model.Domicilios[i].Piso, new { htmlAttributes = new { @class = "form-control input-sm col-sm-6" } }) <br />
+                                            <span>Dpto</span>  @Html.EditorFor(model => model.Domicilios[i].Dpto, new { htmlAttributes = new { @class = "form-control input-sm col-sm-6" } }) <br />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-lg-3">
+                                <span>Borrar</span>
+                                <a class="btn btn-danger btn-sm" title="Eliminar" href="@Url.Action("Delete", "ClientesDirecciones", new { Model.Domicilios[i].Id, Model.Domicilios[i].ClienteId })"><i class=" glyphicon glyphicon-trash"></i></a>
+                            </div>
+                        }
+                    }
+
+                    <a href="#dom" data-toggle="collapse" class="btn btn-info">Agregar un domicilio</a>
+                    <dl id="dom" class="collapse ">
+                        <span>Ciudad</span>
+                        @Html.DropDownListFor(m => m.Direccion.CiudadId, new SelectList(Model.ListaCiudades, "Id", "Nombre"), "Seleccione uno", htmlAttributes: new { @class = "form-control input-sm" })
+                        <div class="row">
+
+
+                            <div class="col-sm-6">
+                                <span>Calle: </span>@Html.TextBoxFor(m => m.Direccion.Calle, htmlAttributes: new { @class = "form-control input-sm" })
+                                <span>Altura: </span>@Html.TextBoxFor(m => m.Direccion.Altura, htmlAttributes: new { @class = "form-control input-sm" })
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span>Piso: </span>@Html.TextBoxFor(m => m.Direccion.Piso, htmlAttributes: new { @class = "form-control input-sm" })
+                                        <span>Dpto: </span>@Html.TextBoxFor(m => m.Direccion.Dpto, htmlAttributes: new { @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </dl>
+                </dl>
+
+                <br />
+
+                <div class="form-control-static  bg-info  img-rounded col-lg-6 container-fluid nuevoDiv">
+                    <dt>
+                        Fecha de nacimiento (d/m/a)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(m => m.Cliente.FechaNacimiento, new { @type = "datetime", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Cliente.FechaNacimiento, "", new { @class = "text-danger" })
+                    </dd>
+                </div>
+
+
+
+
+            </div>
+            <br />
+
+
+
+
+
+
+            <div class="col-lg-5 ">
+
+                <dl class="form-control-static  bg-info img-rounded  container-fluid nuevoDiv">
+
+                    <dt>
+                        Rubro
+                    </dt>
+                    <dd class="form-control-static ">
+                        <div class="">
+                            @foreach (var r in Model.ListaRubros.Where(m => m.Id == Model.Cliente.RubroId))
+                            {
+                                @Html.DropDownListFor(m => m.Cliente.RubroId, new SelectList(Model.ListaRubros, "Id", "Nombre"), "Seleccionar uno", htmlAttributes: new { @class = "form-control  input-sm" })
+                                <!--Elimina el rubro, no el rubro correspondiente al cliente.--> <!--Me quede aca, no pude ver como pasar un parametro del client id aca para luego mandar al route. Puedo probar directamente hallar una forma en el controller de rubro. Pero lo idea seria ver una forma de pasarle un parametro de este id.-->
+                                @Html.ValidationMessageFor(model => model.Cliente.RubroId, "", new { @class = "text-danger" })
+
+
+
+
+
+                            }
+
+                            @if (!Model.ListaRubros.Where(m => m.Id == Model.Cliente.RubroId).Any())
+                            {
+                                @Html.DropDownListFor(m => m.Cliente.RubroId, new SelectList(Model.ListaRubros, "Id", "Nombre"), "Seleccionar uno", htmlAttributes: new { @class = "form-control  input-sm" })
+                            }
+
+
+                        </div>
+
+
+
+                    </dd>
+
+                </dl>
+
+
+                <br />
+
+                <dl class="form-control-static bg-info  img-rounded container-fluid nuevoDiv">
+                    <!--En el dal voy a tener que agregar, creo (o fijarme como hice con direcciones) el tema del campo ClienteId y CiudadId(No permite nulos)-->
+                    <dt>
+                        Telefono
+                    </dt>
+                    <dd>
+                        @if (Model.Agenda != null)
+                        {
+                            for (int i = 0; i < Model.Agenda.Count; i++)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <span>Numero</span> @Html.EditorFor(model => model.Agenda[i].Telefono, new { htmlAttributes = new { @class = "form-control form-control-sm", @type = "number" } })
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span>Ciudad del numero</span> @Html.DropDownListFor(model => model.Agenda[i].CiudadId, new SelectList(Model.ListaCiudades, "Id", "Nombre", Model.Agenda[i].CiudadId), htmlAttributes: new { @class = "form-control  input-sm" })
+                                    
+                                    </div>
+                                    
+                                    <span>Borrar</span> <br />
+                                        <a class="btn btn-danger btn-sm" title="Eliminar" href="@Url.Action("Delete", "ClientesTelefonos", new { n=Model.Agenda[i].Telefono, c=Model.Agenda[i].ClienteId })"><i class=" glyphicon glyphicon-trash"></i></a>
+                                    
+                                </div>
+                            }
+                        }
+                        <br />
+                        <a href="#tel" data-toggle="collapse" class="btn btn-info">Agregar un telefono</a>
+                        <div id="tel" class="collapse row ">
+                            <div class="col-sm-4">
+                                <span>Numero</span> @Html.EditorFor(m => m.ClienteTelefono.Telefono, new { htmlAttributes = new { @class = "form-control input-sm", @type = "number" } })
+                            </div>
+                            <div class="col-sm-4">
+                                <span>Caracteristica</span> @Html.DropDownListFor(model => model.ClienteTelefono.CiudadId, new SelectList(Model.ListaCiudades, "Id", "Nombre"), htmlAttributes: new { @class = "form-control  input-sm" })
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+
+                <br />
+
+                <dl class="form-control-static  bg-info  img-rounded container-fluid nuevoDiv">
+
+                    <dt>
+                        Mail
+                    </dt>
+
+                    <dd>
+                        @if (Model.EmailsEditados != null)
+                        {
+                            for (int i = 0; i < Model.EmailsEditados.Count; i++)
+                            {
+
+
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        @Html.EditorFor(model => model.EmailsEditados[i].Mail, new { htmlAttributes = new { @class = "form-control form-control-sm", @type = "email" } })
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span>Borrar</span>
+                                        <a class="btn btn-danger btn-sm" title="Eliminar" href="@Url.Action("Delete", "Mails", new { Model.EmailsEditados[i].Id, Model.EmailsEditados[i].ClienteId })"><i class=" glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                
+                                </div>
+                                
+                                
+                                
+                                <br />
+                            }
+                        }
+
+                        <a href="#mail" data-toggle="collapse" class="btn btn-info">Agregar un mail</a>
+                        <div id="mail" class="collapse">
+                            <span>Mail</span> @Html.EditorFor(m => m.ClienteMail.Mail, new { htmlAttributes = new { @class = "form-control form-control-sm", @type = "email" } })
+                        </div>
+                    </dd>
+
+                </dl>
+
+                <br />
+
+                <div class="form-control-static  bg-info  img-rounded container-fluid nuevoDiv">
+
+                    <div class="row">
+                        <dt class="col-sm-4">Fuentes de contacto</dt>
+
+                        <dd class="col-sm-3">
+                            @foreach (var item in Model.Cliente.ClientesFuentesContacto)
+                            {
+
+                                @Html.DisplayFor(modelItem => item.FuentesContacto.Nombre) <br />
+
+                            }
+                        </dd>
+                    </div>
+                    <br />
+                    <a href="#fuente" data-toggle="collapse" class="btn btn-info">Cambiar fuente</a>
+                    
+                    <dd id="fuente" class="collapse">
+                       <br />
+                        @Html.ListBoxFor(m => m.FuentesSeleccionadas, new SelectList(Model.ListaFuentes, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+                       
+                    </dd>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <br />
+    <div class="col-lg-4">
+        <a class=" btn btn-group-sm btn-lg center-block " title="Index" href="@Url.Action("Index", "Clients", null)">
+            Volver al Inicio
+        </a>
+    </div>
+
+    <div class="col-lg-4">
+        <input type="submit" value="Save" class="btn btn-success btn-lg center-block">
+    </div>
+
+
+    <div class="col-lg-4">
+        <a class=" btn btn-group-sm btn-lg center-block" title="Detalles" href="@Url.Action("Details", "Clients", new { id = Model.Cliente.Id })">
+            Volver a Detalles
+        </a>
+    </div>
+
+    <br />
+
+}
